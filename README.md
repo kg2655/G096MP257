@@ -35,7 +35,7 @@ Use Windows PowerShell from the repository root:
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install "dvc==3.67.1"
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
 Place the supplied CSV files in `data/raw/`. Verify the tracked data after placing the files with:
@@ -44,4 +44,4 @@ Place the supplied CSV files in `data/raw/`. Verify the tracked data after placi
 .\.venv\Scripts\dvc.exe status
 ```
 
-The project's pinned application dependencies and commands for model training and API serving will be documented here as those components are added.
+The pinned project dependencies are listed in `requirements.txt`. Model-training and API-serving commands will be documented here after the components are integrated.

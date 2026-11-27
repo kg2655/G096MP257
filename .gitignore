@@ -3,3 +3,5 @@
 /data/raw/*.csv
 .venv/
 /data/processed/*.csv
+/mlartifacts/
+/mlruns/

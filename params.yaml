@@ -1,0 +1,48 @@
+project:
+  problem_id: MP257
+  random_seed: 42
+
+paths:
+  original_train: data/raw/train.csv
+  cleaned_train: data/processed/train_clean.csv
+  later: data/raw/later.csv
+  holdout: data/raw/holdout_features.csv
+  local_model: models/model.joblib
+  holdout_predictions: predictions/holdout_predictions.csv
+
+mlflow:
+  tracking_uri: sqlite:///mlflow.db
+  experiment_name: MP257-water-demand
+  registered_model_name: mp257-water-demand
+
+training:
+  validation_size: 0.2
+  target: litres_per_day
+  features:
+    - flats_occupied
+    - temp_c
+    - garden_area_m2
+    - tank_level_morning_pct
+    - leak_complaints
+    - supply_hours
+    - supply_source
+    - tower
+  candidates:
+    random_forest:
+      estimator: random_forest
+      params:
+        n_estimators: 200
+        max_depth: 12
+        min_samples_leaf: 2
+    extra_trees:
+      estimator: extra_trees
+      params:
+        n_estimators: 300
+        max_depth: null
+        min_samples_leaf: 2
+    gradient_boosting:
+      estimator: gradient_boosting
+      params:
+        n_estimators: 200
+        learning_rate: 0.05
+        max_depth: 2
