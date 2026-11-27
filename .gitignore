@@ -1,0 +1,3 @@
+# Keep the supplied datasets local; track them through DVC instead.
+/data/*.csv
+/data/raw/*.csv
