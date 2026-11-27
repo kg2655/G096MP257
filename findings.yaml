@@ -1,8 +1,7 @@
-# MP257 findings --- fill in every value, keep every key.
-# The marking tool reads this file. Write null only where the comment says so.
-# Use the exact column names and group values from your data files.
 
-group_id: "G096"          # your group id, e.g. "G042"
+# MP257 findings
+
+group_id: "G096"
 problem_id: "MP257"
 
 data_issues:
@@ -42,24 +41,27 @@ data_issues:
 
 tracking:
   experiment_name: null
-  best_run_id: null        # the MLflow run id of your v1 model
+  best_run_id: null
   registered_model_name: null
   champion_version: null
 
 monitoring:
-  psi:                     # cleaned train.csv vs later.csv, 10 bins
+  psi:
     flats_occupied: null
     temp_c: null
     garden_area_m2: null
     tank_level_morning_pct: null
     leak_complaints: null
     supply_hours: null
+
   most_drifted_feature: null
-  mae_by_group:            # v1 on later.csv, per value of tower
+
+  mae_by_group:
     'Tower A': null
     'Tower B': null
     'Tower C': null
+
   worst_served_group: null
-  mae_v1_on_check: null    # v1 on the last 30% of later.csv (by date)
-  mae_v2_on_check: null    # v2 on the same rows
-  decision: null           # promote or keep
+  mae_v1_on_check: null
+  mae_v2_on_check: null
+  decision: null

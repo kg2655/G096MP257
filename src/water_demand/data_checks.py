@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[2]
 
 TRAIN_FILE = ROOT / "data" / "raw" / "train.csv"
 LATER_FILE = ROOT / "data" / "raw" / "later.csv"
-HOLDOUT_FILE = ROOT / "data" / "holdout_features.csv"
+HOLDOUT_FILE = ROOT / "data" / "raw" / "holdout_features.csv"
 
 OUTPUT_DIR = ROOT / "data" / "processed"
 CLEAN_FILE = OUTPUT_DIR / "train_clean.csv"
@@ -401,7 +401,7 @@ def main():
 
     clean_data(train, findings)
 
-    update_findings(findings)
+    //update_findings(findings)
 
     print("\n================================")
     print("ALL DATA CHECKS COMPLETED")
@@ -412,3 +412,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
