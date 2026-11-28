@@ -44,4 +44,18 @@ Place the supplied CSV files in `data/raw/`. Verify the tracked data after placi
 .\.venv\Scripts\dvc.exe status
 ```
 
-The pinned project dependencies are listed in `requirements.txt`. Model-training and API-serving commands will be documented here after the components are integrated.
+The pinned project dependencies are listed in `requirements.txt`. API-serving commands will be added when the service is integrated.
+
+## Run the data and modeling pipeline
+
+Run these commands from the repository root, in order, after placing all three supplied CSV files in `data/raw/` and installing the requirements above:
+
+```powershell
+.\.venv\Scripts\python.exe src\water_demand\data_checks.py
+.\.venv\Scripts\python.exe src\water_demand\modeling.py
+.\.venv\Scripts\python.exe src\water_demand\monitoring.py
+```
+
+The first command checks the seven data issues, cleans the training data, and updates the data section of `findings.yaml`. The second compares the configured v1 candidates, logs their results to MLflow, registers the best model as v1, and sets the `champion` alias. The third calculates drift and tower-level MAE, trains and evaluates v2, applies the promotion rule, updates `findings.yaml`, and writes `predictions/holdout_predictions.csv` using the champion model.
+
+These commands create MLflow runs and registered model versions. The repository already contains the generated results and a populated `mlflow.db`; do not rerun the modeling and monitoring commands against that database unless you intend to create new model versions and refresh the recorded findings and predictions. The v1 training command stops if the registered model already exists.
