@@ -264,6 +264,10 @@ def run_monitoring_and_v2(params_path: str | Path | None = None) -> dict[str, An
         champion_model = v1_model
         champion_version = 1
 
+    champion_path = _project_path(paths["local_model"])
+    champion_path.parent.mkdir(parents=True, exist_ok=True)
+    joblib.dump(champion_model, champion_path)
+
     holdout_predictions = champion_model.predict(holdout[features])
     prediction_path = _project_path(paths["holdout_predictions"])
     prediction_path.parent.mkdir(parents=True, exist_ok=True)
