@@ -1,67 +1,53 @@
-
-# MP257 findings
-
-group_id: "G096"
-problem_id: "MP257"
-
+group_id: G096
+problem_id: MP257
 data_issues:
   leaking_column:
     present: false
     column: null
-
   unit_mixup:
     present: true
-    tower: Tower B
-    conversion_factor: 10
-
+    column: garden_area_m2
+    group_value: Tower B
+    factor: 10
   sentinel_value:
     present: true
+    column: supply_hours
     value: 999
     count: 45
-
   duplicate_rows:
     present: false
     count: 0
-
   stuck_sensor:
     present: true
-    repeated_rows: 95
-    start_date: "2026-04-17"
-    end_date: "2026-05-05"
-
+    column: tank_level_morning_pct
+    start_date: '2026-04-17'
+    end_date: '2026-05-05'
   target_typos:
     present: true
-    rows_affected: 11
-
+    count: 11
   spelling_variants:
     present: true
-    raw_spellings: 18
-    true_categories: 3
-
-
+    column: supply_source
+    true_levels: 3
 tracking:
-  experiment_name: null
-  best_run_id: null
-  registered_model_name: null
-  champion_version: null
-
+  experiment_name: MP257-water-demand
+  best_run_id: 7cb242ec037243a3a595f0ca362f6bf7
+  registered_model_name: mp257-water-demand
+  champion_version: 2
 monitoring:
   psi:
-    flats_occupied: null
-    temp_c: null
-    garden_area_m2: null
-    tank_level_morning_pct: null
-    leak_complaints: null
-    supply_hours: null
-
-  most_drifted_feature: null
-
+    flats_occupied: 0.031873956904776714
+    temp_c: 9.43147789521533
+    garden_area_m2: 0.012128246704267967
+    tank_level_morning_pct: 1.659574293904143
+    leak_complaints: 0.0541222594274369
+    supply_hours: 0.7741475200414873
+  most_drifted_feature: temp_c
   mae_by_group:
-    'Tower A': null
-    'Tower B': null
-    'Tower C': null
-
-  worst_served_group: null
-  mae_v1_on_check: null
-  mae_v2_on_check: null
-  decision: null
+    Tower A: 5081.390410504886
+    Tower B: 6999.911873185285
+    Tower C: 16578.050491187045
+  worst_served_group: Tower C
+  mae_v1_on_check: 9475.039835171412
+  mae_v2_on_check: 3541.649897930375
+  decision: promote

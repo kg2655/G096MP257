@@ -323,11 +323,13 @@ def update_findings(findings):
 
   unit_mixup:
     present: {unit_present}
-    tower: {tower}
-    conversion_factor: {factor}
+    column: {unit_column}
+    group_value: {tower}
+    factor: {factor}
 
   sentinel_value:
     present: {sentinel_present}
+    column: {sentinel_column}
     value: {sentinel}
     count: {sentinel_count}
 
@@ -337,37 +339,37 @@ def update_findings(findings):
 
   stuck_sensor:
     present: {stuck_present}
-    repeated_rows: {stuck_count}
+    column: tank_level_morning_pct
     start_date: "{start_date}"
     end_date: "{end_date}"
 
   target_typos:
     present: {typo_present}
-    rows_affected: {typo_count}
+    count: {typo_count}
 
   spelling_variants:
     present: {spelling_present}
-    raw_spellings: {raw_spellings}
-    true_categories: {true_categories}
+    column: supply_source
+    true_levels: {true_categories}
 """.format(
         leaking=str(findings["leaking_column"]["present"]).lower(),
         leaking_column=findings["leaking_column"]["column"] or "null",
         unit_present=str(findings["unit_mixup"]["present"]).lower(),
+        unit_column="garden_area_m2" if findings["unit_mixup"]["present"] else "null",
         tower=details["affected_tower"] or "null",
         factor=details["conversion_factor"] or "null",
         sentinel_present=str(findings["sentinel_value"]["present"]).lower(),
+        sentinel_column="supply_hours" if findings["sentinel_value"]["present"] else "null",
         sentinel=details["sentinel_value"] if details["sentinel_value"] is not None else "null",
         sentinel_count=findings["sentinel_value"]["count"],
         duplicate_present=str(findings["duplicate_rows"]["present"]).lower(),
         duplicate_count=findings["duplicate_rows"]["count"],
         stuck_present=str(findings["stuck_sensor"]["present"]).lower(),
-        stuck_count=findings["stuck_sensor"]["repeated_rows"],
         start_date=findings["stuck_sensor"]["start_date"] or "null",
         end_date=findings["stuck_sensor"]["end_date"] or "null",
         typo_present=str(findings["target_typos"]["present"]).lower(),
         typo_count=findings["target_typos"]["rows_affected"],
         spelling_present=str(findings["spelling_variants"]["present"]).lower(),
-        raw_spellings=findings["spelling_variants"]["raw_spellings"],
         true_categories=findings["spelling_variants"]["true_categories"]
     )
 
@@ -401,7 +403,7 @@ def main():
 
     clean_data(train, findings)
 
-    //update_findings(findings)
+    update_findings(findings)
 
     print("\n================================")
     print("ALL DATA CHECKS COMPLETED")
